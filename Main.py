@@ -112,7 +112,7 @@ class Aplication:
         self.flag = None
         while self.flag == None:
             try:
-                self.valor = float(input("Para cancelar, clique ENTER\nDigite o valor para depósito: "))
+                self.valor = float(input("Digite o valor para depósito: "))
             except ValueError:
                 print("O valor deve ser númerico!")
                 continue
@@ -186,7 +186,10 @@ class Aplication:
                             f'O seu saldo da conta corrente agora é de R${self.saldo_cc}'
                         )
 
-                
+    def deposito_cp(self):
+        pass
+
+    
     def atualizar_dados(self):
         ''' Atualizar dados do usuário'''
         pass
