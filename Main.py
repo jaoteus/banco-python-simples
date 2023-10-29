@@ -3,7 +3,7 @@ initial commit
 '''
 import os
 
-class Aplication():
+class Aplication:
     def __init__(self):
         ''' Variáveis '''
         self.saldo_cc = 0.0
@@ -49,31 +49,21 @@ class Aplication():
     #             continue
 
     def menu(self):
+        ''' Menu Principal'''
         print('1 - Dados da conta')
         print('2 - Depósito na conta corrente')
         print('3 - Saque na conta corrente')
         print('4 - Depósito na conta poupança')
         print('5 - Resgate na conta poupança')
         print('6 - Sair')
+
         while self.loop_menu:
             self.valor = str(input("Digite: "))
             match self.valor:
                 case '1':
                     # Dados da conta
                     print("Funcionou")
-                    # self.mostrar_dados(
-                    #     self.agencia,
-                    #     self.nome_titular,
-                    #     self.senha,
-                    #     self.saldo_cc,
-                    #     self.saldo_cp,
-                    #     self.numero,
-                    #     self.CPF,
-                    #     self.endereco,
-                    #     self.email,
-                    #     self.numero_conta_corrente,
-                    #     self.numero_conta_poupanca
-                    # )
+                    self.mostrar_dados()
                     break
                 case '2':
                     # Depósito conta corrente
@@ -99,11 +89,28 @@ class Aplication():
                     print("Você não digitou nada!")
                     print("Funcionou")
                     break
+
     def mostrar_dados(self):
+        ''' Mostrar dados do usuário '''
+        os.system('cls')
+        print(f'Seu nome: {self.nome_titular}')
+        print(f'Sua agência: {self.agencia}')
+        print(f'Conta corrente: {self.numero_conta_corrente}')
+        print(f'Conta poupança: {self.numero_conta_poupanca}')
+        print(f'Número de telefone: {self.numero}')
+        print(f'E-mail: {self.email}')
+        print(f'CPF: {self.CPF}')
+        print(f'Endereço: {self.endereco}')
+        print(f'Senha: ********')
+
+        return None
+    
+
+
+
+
+    def atualizar_dados(self):
+        ''' Atualizar dados do usuário'''
         pass
-        
-
-
-
 
 Aplication()
