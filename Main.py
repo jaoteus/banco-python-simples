@@ -26,6 +26,7 @@ class Aplication:
 
         ''' Flags '''
         self.autenticado = None
+        self.flag = None
 
         ''' Funções '''
         # self.login()     
@@ -58,20 +59,19 @@ class Aplication:
         print('6 - Sair')
 
         while self.loop_menu:
-            self.valor = str(input("Digite: "))
-            match self.valor:
+            self.opcao_menu = str(input("Digite: "))
+            match self.opcao_menu:
                 case '1':
                     # Dados da conta
-                    print("Funcionou")
                     self.mostrar_dados()
                     break
                 case '2':
                     # Depósito conta corrente
-                    print("Funcionou")
+                    self.deposito_cc()
                     break
                 case '3':
                     # Saque na conra corrente
-                    print("Funcionou")
+                    self.saque_cc()
                     break
                 case '4':
                     # Deposito na conta poupanca
@@ -102,13 +102,91 @@ class Aplication:
         print(f'CPF: {self.CPF}')
         print(f'Endereço: {self.endereco}')
         print(f'Senha: ********')
+        print(f'Saldo conta corrente: {self.saldo_cc}')
+        print(f'Saldo conta poupança: {self.saldo_cp}')
+        self.menu()
 
         return None
     
+    def deposito_cc(self):
+        self.flag = None
+        while self.flag == None:
+            try:
+                self.valor = float(input("Para cancelar, clique ENTER\nDigite o valor para depósito: "))
+            except ValueError:
+                print("O valor deve ser númerico!")
+                continue
+            else:
+                while self.flag == None:
+                    print(f'Você está prestes a depositar R${self.valor} na sua conta corrente, deseja continuar ?\nS - Sim\nN - Não')
+                    self.opcao_menu = str(input('Digite: '))
+                    if self.opcao_menu == 'S' or self.opcao_menu == 's':
+                        self.saldo_cc = self.saldo_cc + self.valor
+                        self.flag = True
+                        os.system('cls')
+                        print(
+                            f'Depósito no valor de R${self.valor} depositado com sucesso!\n'
+                            f'Agora o seu saldo da conta corrente é de R${self.saldo_cc} :)'
+                            )
+                        self.menu()
+                    elif self.opcao_menu != 'S' or self.opcao_menu != 's':
+                        os.system('cls')
+                        self.flag = True
+                        print(
+                            "Operação cancelada com sucesso!\n"
+                            f'O saldo da sua conta corrente permanece em R${self.saldo_cc} :)'
+                            )
+                        self.menu()
 
+    def saque_cc(self):
+        self.flag = None
+        self.result = 0.0
+        while self.flag == None:
+            try:
+                self.valor = float(input("Digite o valor desejado para o saque: "))
+                
+                if self.valor > self.saldo_cc:
+                    print(
+                        "Saldo insuficiente :(\n"
+                        f'Seu saldo é de R${self.saldo_cc}'
+                        )
+                    self.opcao_menu = input(
+                        'Deseja depositar na sua conta corrente ?\n'
+                        'S - Sim\n'
+                        'N - Não\n'
+                        'Digite: '
+                        )
+                    if self.opcao_menu == 'S' or self.opcao_menu == 's':
+                        self.flag = True
+                        os.system('cls')
+                        self.deposito_cc()
+                    else:
+                        self.flag = True
+                        os.system('cls')
+                        self.menu()
+                else:
+                    pass
+            except ValueError:
+                print("O valor deve ser númerico!")
+                continue
+            else:
+                while self.flag == None:
+                    print(
+                        f'Você está prestes a sacar R${self.valor} da sua conta corrente, deseja continuar ?\n'
+                        'S - Sim\n'
+                        'N - Não\n'
+                        )
+                    self.opcao_menu = str(input('Digite: '))
+                    if self.opcao_menu == 'S' or self.opcao_menu =='s':
+                        self.saldo_cc = self.saldo_cc - self.valor
+                        os.system('cls')
+                        self.menu()
+                        print(
+                            f'Saque no valor de R${self.valor} efetuado com sucesso!'
+                            f'O seu saldo da conta corrente agora é de R${self.saldo_cc}'
+                        )
 
-
-
+                
     def atualizar_dados(self):
         ''' Atualizar dados do usuário'''
         pass
