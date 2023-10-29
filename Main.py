@@ -187,6 +187,7 @@ class Aplication:
                         )
 
     def deposito_cp(self):
+        print('funcionou!')
         pass
 
     
